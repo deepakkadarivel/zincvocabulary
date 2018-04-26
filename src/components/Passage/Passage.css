@@ -1,0 +1,19 @@
+.PassageComponent {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.passage_title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #404040;
+}
+
+.passage_textarea {
+  height: 65vh;
+  width: 100%;
+}
+
+.passage_button {
+}
