@@ -5,11 +5,9 @@ import cx from 'classnames';
 import './Button.css';
 
 const Button = props => {
-  const { children, className, onClick, ...others } = props;
-
   return (
-    <button {...others} className={cx('Button', className)} onClick={onClick}>
-      {children}
+    <button className={cx('Button', props.className)} onClick={props.onClick}>
+      {props.children}
     </button>
   );
 };

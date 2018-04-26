@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import Button from './Button';
 
 describe('<Button />', () => {
-  it('renders the button of a particular type', () => {
+  it('renders the button component', () => {
     const onClickMock = jest.fn();
 
     const props = {

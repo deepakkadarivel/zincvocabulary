@@ -1,0 +1,13 @@
+.TextArea {
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+}
+
+.TextArea:focus {
+  outline: 0;
+}
+
+.TextArea_passage {
+  height: 65vh;
+}
