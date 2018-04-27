@@ -3,6 +3,7 @@ import './Passage.css';
 import Button from '../shared/Button/Button';
 import TextArea from '../shared/TextArea/TextArea';
 import PropTypes from 'prop-types';
+import passageInitialState from './passageInitialState';
 
 class PassageComponent extends Component {
   constructor(props) {
@@ -11,10 +12,22 @@ class PassageComponent extends Component {
       passage: ''
     };
     this.handlePassageChange = this.handlePassageChange.bind(this);
+    this.clear = this.clear.bind(this);
   }
 
   handlePassageChange(e) {
     this.setState({ passage: e.target.value });
+  }
+
+  clear() {
+    this.setState(
+      {
+        passage: passageInitialState.passage
+      },
+      () => {
+        this.props.clearPassage();
+      }
+    );
   }
 
   render() {
@@ -33,10 +46,7 @@ class PassageComponent extends Component {
           placeholder={'Enter your passage here.'}
         />
         <div className="passage_footer">
-          <Button
-            className="Button_normal"
-            onClick={() => this.props.clearPassage()}
-          >
+          <Button className="Button_normal" onClick={() => this.clear()}>
             reset
           </Button>
           <Button
