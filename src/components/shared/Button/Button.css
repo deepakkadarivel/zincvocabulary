@@ -13,6 +13,19 @@
   outline: 0;
 }
 
+.Button_normal {
+  background-color: #757575;
+  color: #ffffff;
+}
+
+.Button_normal:hover {
+  background-color: #424242;
+}
+
+.Button_normal:active {
+  background-color: #212121;
+}
+
 .Button_primary {
   background-color: #8bc34a;
   color: #ffffff;

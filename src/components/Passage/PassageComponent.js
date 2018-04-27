@@ -32,14 +32,28 @@ class PassageComponent extends Component {
           controlFunc={this.handlePassageChange}
           placeholder={'Enter your passage here.'}
         />
-        <Button className="Button_primary">next</Button>
+        <div className="passage_footer">
+          <Button
+            className="Button_normal"
+            onClick={() => this.props.clearPassage()}
+          >
+            reset
+          </Button>
+          <Button
+            className="Button_primary"
+            onClick={() => this.props.updatePassage(this.state.passage)}
+          >
+            next
+          </Button>
+        </div>
       </div>
     );
   }
 }
 
 PassageComponent.propTypes = {
-  updatePassage: PropTypes.func
+  updatePassage: PropTypes.func,
+  clearPassage: PropTypes.func
 };
 
 export default PassageComponent;

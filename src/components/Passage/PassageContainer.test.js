@@ -27,6 +27,9 @@ describe('<PassageContainer />', () => {
       type: passageActionTypes.UPDATE_PASSAGE,
       passage: 'sample passage'
     });
+    spyOn(passageActions, 'clearPassage').and.returnValue({
+      type: passageActionTypes.CLEAR_PASSAGE
+    });
 
     PassageComponent.mockImplementation(() => {
       return {
@@ -64,6 +67,13 @@ describe('<PassageContainer />', () => {
       expect(store.dispatch).toHaveBeenCalledWith({
         type: passageActionTypes.UPDATE_PASSAGE,
         passage: 'sample passage'
+      });
+    });
+
+    it('calls clearPassage action', () => {
+      componentProps.clearPassage();
+      expect(store.dispatch).toHaveBeenCalledWith({
+        type: passageActionTypes.CLEAR_PASSAGE
       });
     });
   });
