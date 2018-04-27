@@ -1,8 +1,7 @@
 import seamlessImmutable from 'seamless-immutable';
 
 const passageInitialState = seamlessImmutable({
-  passage: '',
-  vocabularyList: []
+  passage: ''
 });
 
 export default passageInitialState;

@@ -9,15 +9,6 @@ const passageReducer = (state = passageInitialState, action) => {
     case passageActionTypes.CLEAR_PASSAGE:
       return state.set('passage', passageInitialState.passage);
 
-    case passageActionTypes.UPDATE_VOCABULARY_LIST:
-      return state.setIn(['vocabularyList', action.list], []);
-
-    case passageActionTypes.RESET_VOCABULARY_LIST:
-      return state.setIn(
-        ['vocabularyList', passageInitialState.vocabularyList],
-        []
-      );
-
     default:
       return state;
   }

@@ -1,0 +1,7 @@
+const vocabularyActionTypes = {
+  UPDATE_VOCABULARY_LIST: 'UPDATE_VOCABULARY_LIST',
+  DELETE_VOCABULARY: 'DELETE_VOCABULARY',
+  RESET_VOCABULARY_LIST: 'RESET_VOCABULARY_LIST'
+};
+
+export default vocabularyActionTypes;
