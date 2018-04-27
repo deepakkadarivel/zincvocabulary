@@ -4,6 +4,7 @@ import PassageContainer from '../components/Passage/PassageContainer';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureStore from '../appStore';
+import VocabularyContainer from '../components/Vocabulary/VocabularyContainer';
 
 const store = configureStore();
 
@@ -14,7 +15,7 @@ class App extends Component {
         <Provider store={store}>
           <div className="App">
             <PassageContainer />
-            <PassageContainer />
+            <VocabularyContainer />
           </div>
         </Provider>
       </BrowserRouter>

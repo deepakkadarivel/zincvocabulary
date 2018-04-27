@@ -13,7 +13,9 @@ import * as passageActions from './passageActions';
 describe('<PassageContainer />', () => {
   const state = {
     passage: {
-      passage: '',
+      passage: ''
+    },
+    vocabulary: {
       vocabularyList: []
     }
   };
