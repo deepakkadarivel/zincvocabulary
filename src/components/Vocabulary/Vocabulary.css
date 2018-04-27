@@ -10,6 +10,10 @@
   color: #404040;
 }
 
-.vocabulary_footer button {
-  margin-right: 10px;
+.vocabulary_list {
+  height: 60vh;
+}
+
+.vocabulary_footer {
+  display: block;
 }
