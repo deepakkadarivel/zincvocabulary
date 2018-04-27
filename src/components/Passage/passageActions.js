@@ -26,7 +26,7 @@ const resetVocabularyList = () => {
   };
 };
 
-const appendToVocabularyList = (list, vocabulary) => {
+const appendVocabulary = (list, vocabulary) => {
   return (dispatch, getState) => {
     let updatedList = [...list, vocabulary];
     dispatch(updateVocabularyList(updatedList));
@@ -45,6 +45,6 @@ export {
   clearPassage,
   updateVocabularyList,
   resetVocabularyList,
-  appendToVocabularyList,
+  appendVocabulary,
   deleteVocabulary
 };

@@ -6,7 +6,7 @@ import {
   clearPassage,
   updateVocabularyList,
   resetVocabularyList,
-  appendToVocabularyList,
+  appendVocabulary,
   deleteVocabulary
 } from './passageActions';
 import passageActionTypes from './passageActionTypes';
@@ -16,7 +16,7 @@ describe('passageActions', () => {
   const state = {
     passage: {
       passage: '',
-      vocabularyList: ''
+      vocabularyList: []
     }
   };
 
@@ -79,6 +79,40 @@ describe('passageActions', () => {
       ];
 
       store.dispatch(resetVocabularyList());
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('appendVocabulary', () => {
+    it(`creates appendVocabulary action`, () => {
+      const store = mockStore(state);
+      const vocabularyList = ['1', '2'];
+      const expectedActions = [
+        {
+          type: passageActionTypes.UPDATE_VOCABULARY_LIST,
+          list: ['1', '2', '3']
+        }
+      ];
+
+      store.dispatch(appendVocabulary(vocabularyList, '3'));
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('deleteVocabulary', () => {
+    it(`creates deleteVocabulary action`, () => {
+      const store = mockStore(state);
+      const vocabularyList = ['1', '2', '3'];
+      const expectedActions = [
+        {
+          type: passageActionTypes.UPDATE_VOCABULARY_LIST,
+          list: ['1', '2']
+        }
+      ];
+
+      store.dispatch(deleteVocabulary(vocabularyList, '3'));
 
       expect(store.getActions()).toEqual(expectedActions);
     });
