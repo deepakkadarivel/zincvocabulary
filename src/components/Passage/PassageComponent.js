@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './Passage.css';
 import Button from '../shared/Button/Button';
 import TextArea from '../shared/TextArea/TextArea';
+import PropTypes from 'prop-types';
 
 class PassageComponent extends Component {
   constructor(props) {
@@ -36,5 +37,9 @@ class PassageComponent extends Component {
     );
   }
 }
+
+PassageComponent.propTypes = {
+  updatePassage: PropTypes.func
+};
 
 export default PassageComponent;
