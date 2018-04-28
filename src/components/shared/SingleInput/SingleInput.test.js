@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import SingleInput from './SingleInput';
+import PropTypes from 'prop-types';
 
 describe('<SingleInput />', () => {
   it('renders the SingleInput component', () => {
@@ -13,19 +14,27 @@ describe('<SingleInput />', () => {
       name: 'vocabulary',
       controlFunc: controlFuncMock,
       content: 'word1',
-      placeholder: 'enter a word'
+      placeholder: 'enter a word',
+      message: 'input label message',
+      messageClass: 'success'
     };
 
     const component = shallow(<SingleInput {...props} />);
+    const input = component.find('input');
 
-    expect(component.hasClass('Input_vocabulary')).toBeTruthy();
-    expect(component.props().type).toBe('text');
-    expect(component.props().name).toBe('vocabulary');
-    expect(component.props().value).toBe('word1');
-    expect(component.props().placeholder).toBe('enter a word');
+    expect(input.hasClass('Input')).toBeTruthy();
+    expect(input.props().type).toBe('text');
+    expect(input.props().name).toBe('vocabulary');
+    expect(input.props().value).toBe('word1');
+    expect(input.props().placeholder).toBe('enter a word');
 
-    component.props().onChange();
+    input.props().onChange();
 
     expect(controlFuncMock).toHaveBeenCalled();
+
+    const label = component.find('label');
+
+    expect(label.hasClass('message-label')).toBeTruthy();
+    expect(label.props().children).toEqual('input label message');
   });
 });

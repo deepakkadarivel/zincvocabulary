@@ -16,7 +16,9 @@ describe('<VocabularyComponent />', () => {
     updateVocabularyList: updateVocabularyListMock,
     resetVocabularyList: resetVocabularyListMock,
     appendVocabulary: appendVocabularyMock,
-    deleteVocabulary: deleteVocabularyMock
+    deleteVocabulary: deleteVocabularyMock,
+    message: 'input notification message',
+    messageClass: 'message-success'
   };
 
   it('renders the Vocabulary Component', () => {
@@ -37,6 +39,11 @@ describe('<VocabularyComponent />', () => {
   it('renders the TextArea component inside Vocabulary Component', () => {
     const component = shallow(<VocabularyComponent {...props} />);
 
+    component.setState({
+      message: props.message,
+      messageClass: props.messageClass
+    });
+
     const passageComponent = component.find('.VocabularyComponent');
 
     const singleInputComponent = passageComponent.find('SingleInput');
@@ -49,6 +56,10 @@ describe('<VocabularyComponent />', () => {
     expect(singleInputComponent.props().placeholder).toBe(
       'Type a word to add to the set...'
     );
+    expect(singleInputComponent.props().message).toBe(
+      'input notification message'
+    );
+    expect(singleInputComponent.props().messageClass).toBe('message-success');
   });
 
   it('renders the Button components inside Vocabulary Component', () => {

@@ -12,3 +12,17 @@
 .Input_vocabulary {
   width: 100%;
 }
+
+.message-label {
+  font-size: 12px;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.message-error {
+  color: #ff0000;
+}
+
+.message-success {
+  color: #8bc34a;
+}

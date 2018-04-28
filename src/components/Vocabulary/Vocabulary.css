@@ -17,3 +17,7 @@
 .vocabulary_footer {
   display: block;
 }
+
+.vocabulary_footer button {
+  float: left;
+}
