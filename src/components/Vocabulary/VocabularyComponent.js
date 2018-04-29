@@ -3,6 +3,7 @@ import './Vocabulary.css';
 import Button from '../shared/Button/Button';
 import PropTypes from 'prop-types';
 import SingleInput from '../shared/SingleInput/SingleInput';
+import VocabularySetContainer from './VocabularySet/VocabularySetContainer';
 
 class VocabularyComponent extends Component {
   constructor(props) {
@@ -14,10 +15,10 @@ class VocabularyComponent extends Component {
       messageClass: ''
     };
     this.handleWordChange = this.handleWordChange.bind(this);
-    this.renderVocabularySet = this.renderVocabularySet.bind(this);
     this.checkAndCreateNewWordInVocabulary = this.checkAndCreateNewWordInVocabulary.bind(
       this
     );
+    this.submit = this.submit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -28,23 +29,45 @@ class VocabularyComponent extends Component {
     }
   }
 
-  renderVocabularySet() {
-    return this.state.vocabularySet.map(vocabulary => {
-      return <li key={vocabulary}>{vocabulary}</li>;
-    });
-  }
-
   checkAndCreateNewWordInVocabulary() {
-    if (!this.state.vocabularySet.includes(this.state.word)) {
+    const word = this.state.word.trim();
+    if (word === '') {
+      this.setState({
+        message: `Empty values cannot be added to vocabulary set.`,
+        messageClass: 'message-error'
+      });
+    } else if (this.state.vocabularySet.length === 15) {
+      this.setState({
+        message: `You already have 15 words in vocabulary, Please delete few to add more.`,
+        messageClass: 'message-error'
+      });
+    } else if (!this.state.vocabularySet.includes(word)) {
       this.setState({
         word: '',
-        message: `Word ${this.state.word} added to your vocabulary.`,
+        message: `Word ${word} added to your vocabulary.`,
         messageClass: 'message-success'
       });
-      this.props.appendVocabulary(this.state.vocabularySet, this.state.word);
+      this.props.appendVocabulary(this.state.vocabularySet, word);
     } else {
       this.setState({
-        message: `Word ${this.state.word} is already in your vocabulary.`,
+        message: `Word ${word} is already in your vocabulary.`,
+        messageClass: 'message-error'
+      });
+    }
+  }
+
+  submit() {
+    const vocabularyLength = this.state.vocabularySet.length;
+    if (vocabularyLength === 15) {
+      console.log(this.state.vocabularySet);
+      this.setState({
+        message: `Your vocabulary set is successfully printed in console`,
+        messageClass: 'message-success'
+      });
+    } else {
+      this.setState({
+        message: `You have ${vocabularyLength} words in vocabulary, Please add ${15 -
+          vocabularyLength} more and submit.`,
         messageClass: 'message-error'
       });
     }
@@ -60,7 +83,7 @@ class VocabularyComponent extends Component {
         <p className="vocabulary_title">
           Add up to 15 words to complete your set.
         </p>
-        <div className="vocabulary_list">{this.renderVocabularySet()}</div>
+        <VocabularySetContainer />
         <div className="vocabulary_footer">
           <SingleInput
             className="Input_vocabulary"
@@ -78,6 +101,9 @@ class VocabularyComponent extends Component {
           >
             create
           </Button>
+          <Button className="Button_primary" onClick={() => this.submit()}>
+            submit
+          </Button>
         </div>
       </div>
     );
@@ -86,10 +112,7 @@ class VocabularyComponent extends Component {
 
 VocabularyComponent.propTypes = {
   vocabularyList: PropTypes.array,
-  updateVocabularyList: PropTypes.func,
-  resetVocabularyList: PropTypes.func,
-  appendVocabulary: PropTypes.func,
-  deleteVocabulary: PropTypes.func
+  appendVocabulary: PropTypes.func
 };
 
 export default VocabularyComponent;

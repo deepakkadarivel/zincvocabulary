@@ -11,13 +11,51 @@
 }
 
 .vocabulary_list {
+  width: 100%;
   height: 60vh;
+  overflow: auto;
+}
+
+.vocabulary_list:hover {
+  overflow-y: scroll;
+  visibility: visible;
+}
+
+.vocabulary_list_item {
+  width: 90%;
+  list-style: none;
+  padding: 8px 20px;
+  margin-top: 20px;
+  font-size: 14px;
+  background-color: #8bc34a;
+}
+
+.vocabulary_list_item .word {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.vocabulary_list_item .word span {
+  float: left;
+}
+
+.vocabulary_list_item .word .close {
+  background-color: transparent;
+  border-style: none;
+  float: right;
+  cursor: pointer;
+}
+
+.vocabulary_list_item .word .close:focus {
+  outline: 0;
 }
 
 .vocabulary_footer {
-  display: block;
+  width: 90%;
 }
 
 .vocabulary_footer button {
+  margin-right: 10px;
   float: left;
 }

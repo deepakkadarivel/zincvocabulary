@@ -3,7 +3,8 @@ import { shallow } from 'enzyme';
 
 import VocabularyComponent from './VocabularyComponent';
 import Button from '../shared/Button/Button';
-import TextArea from '../shared/SingleInput/SingleInput';
+import SingleInput from '../shared/SingleInput/SingleInput';
+import VocabularySetContainer from './VocabularySet/VocabularySetContainer';
 
 describe('<VocabularyComponent />', () => {
   const updateVocabularyListMock = jest.fn();
@@ -32,8 +33,9 @@ describe('<VocabularyComponent />', () => {
     const passageTitle = passageComponent.find('p');
     expect(passageTitle.props().children).toBe(pageTitleValue);
 
-    expect(passageComponent.find('SingleInput').length).toBe(1);
+    expect(passageComponent.find(SingleInput).length).toBe(1);
     expect(passageComponent.find(Button).length).toBe(1);
+    expect(passageComponent.find(VocabularySetContainer).length).toBe(1);
   });
 
   it('renders the TextArea component inside Vocabulary Component', () => {
@@ -65,6 +67,9 @@ describe('<VocabularyComponent />', () => {
   it('renders the Button components inside Vocabulary Component', () => {
     const component = shallow(<VocabularyComponent {...props} />);
 
+    const checkAndCreateNewWordInVocabularyMock = jest.fn();
+    component.instance().checkAndCreateNewWordInVocabulary = checkAndCreateNewWordInVocabularyMock;
+
     const passageComponent = component.find('.VocabularyComponent');
 
     const button = passageComponent.find(Button);
@@ -72,10 +77,35 @@ describe('<VocabularyComponent />', () => {
 
     expect(button.props().className).toBe('Button_primary');
     expect(button.prop('children')).toEqual('create');
-    // button
-    //     .at(0)
-    //     .props()
-    //     .onClick();
-    // expect(clearVocabularyMock).toHaveBeenCalled();
+    button
+      .at(0)
+      .props()
+      .onClick();
+    expect(checkAndCreateNewWordInVocabularyMock).toHaveBeenCalled();
+  });
+
+  it('appends new word to Vocabulary list', () => {
+    const component = shallow(<VocabularyComponent {...props} />);
+
+    const checkAndCreateNewWordInVocabularyMock = jest.fn();
+    component.instance().checkAndCreateNewWordInVocabulary = checkAndCreateNewWordInVocabularyMock;
+
+    const passageComponent = component.find('.VocabularyComponent');
+
+    const button = passageComponent.find(Button);
+    expect(button.length).toBe(1);
+
+    component.setState({
+      word: 'new word',
+      vocabularySet: []
+    });
+
+    expect(button.props().className).toBe('Button_primary');
+    expect(button.prop('children')).toEqual('create');
+    button
+      .at(0)
+      .props()
+      .onClick();
+    expect(checkAndCreateNewWordInVocabularyMock).toHaveBeenCalled();
   });
 });
