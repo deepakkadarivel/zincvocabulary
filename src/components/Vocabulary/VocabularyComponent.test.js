@@ -34,7 +34,7 @@ describe('<VocabularyComponent />', () => {
     expect(passageTitle.props().children).toBe(pageTitleValue);
 
     expect(passageComponent.find(SingleInput).length).toBe(1);
-    expect(passageComponent.find(Button).length).toBe(1);
+    expect(passageComponent.find(Button).length).toBe(2);
     expect(passageComponent.find(VocabularySetContainer).length).toBe(1);
   });
 
@@ -73,10 +73,10 @@ describe('<VocabularyComponent />', () => {
     const passageComponent = component.find('.VocabularyComponent');
 
     const button = passageComponent.find(Button);
-    expect(button.length).toBe(1);
+    expect(button.length).toBe(2);
 
-    expect(button.props().className).toBe('Button_primary');
-    expect(button.prop('children')).toEqual('create');
+    expect(button.at(0).props().className).toBe('Button_primary');
+    expect(button.at(0).prop('children')).toEqual('create');
     button
       .at(0)
       .props()
@@ -93,19 +93,44 @@ describe('<VocabularyComponent />', () => {
     const passageComponent = component.find('.VocabularyComponent');
 
     const button = passageComponent.find(Button);
-    expect(button.length).toBe(1);
+    expect(button.length).toBe(2);
 
     component.setState({
       word: 'new word',
       vocabularySet: []
     });
 
-    expect(button.props().className).toBe('Button_primary');
-    expect(button.prop('children')).toEqual('create');
+    expect(button.at(0).props().className).toBe('Button_primary');
+    expect(button.at(0).prop('children')).toEqual('create');
     button
       .at(0)
       .props()
       .onClick();
     expect(checkAndCreateNewWordInVocabularyMock).toHaveBeenCalled();
+  });
+
+  it('submit Vocabulary list', () => {
+    const component = shallow(<VocabularyComponent {...props} />);
+
+    const submitMock = jest.fn();
+    component.instance().submit = submitMock;
+
+    const passageComponent = component.find('.VocabularyComponent');
+
+    const button = passageComponent.find(Button);
+    expect(button.length).toBe(2);
+
+    component.setState({
+      word: 'new word',
+      vocabularySet: []
+    });
+
+    expect(button.at(1).props().className).toBe('Button_primary');
+    expect(button.at(1).prop('children')).toEqual('submit');
+    button
+      .at(1)
+      .props()
+      .onClick();
+    expect(submitMock).toHaveBeenCalled();
   });
 });

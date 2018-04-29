@@ -10,6 +10,7 @@ class VocabularySet extends Component {
       vocabularySet: props.vocabularyList
     };
     this.renderVocabularySet = this.renderVocabularySet.bind(this);
+    this.delete = this.delete.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -20,13 +21,19 @@ class VocabularySet extends Component {
     }
   }
 
+  delete = word => {
+    this.props.deleteVocabulary(this.props.vocabularyList, word);
+  };
+
   renderVocabularySet() {
     return this.state.vocabularySet.map(vocabulary => {
       return (
         <li key={vocabulary} className="vocabulary_list_item">
           <div className="word">
             <span>{vocabulary}</span>{' '}
-            <button className="close">&#10005;</button>
+            <button className="close" onClick={() => this.delete(vocabulary)}>
+              &#10005;
+            </button>
           </div>
         </li>
       );

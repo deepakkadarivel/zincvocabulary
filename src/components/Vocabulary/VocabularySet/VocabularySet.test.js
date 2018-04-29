@@ -4,11 +4,11 @@ import { shallow } from 'enzyme';
 import VocabularySet from './VocabularySet';
 
 describe('<VocabularySet />', () => {
-  const deleteVocabularySetMock = jest.fn();
+  const deleteVocabularyMock = jest.fn();
 
   const props = {
     vocabularyList: ['word1', 'word2'],
-    deleteVocabularySet: deleteVocabularySetMock
+    deleteVocabulary: deleteVocabularyMock
   };
 
   it('renders the VocabularySet Component', () => {
@@ -19,40 +19,18 @@ describe('<VocabularySet />', () => {
     expect(vocabularySet.find('li').length).toBe(2);
   });
 
-  xit('renders the TextArea component inside VocabularySet Component', () => {
+  it('appends new word to VocabularySet list', () => {
     const component = shallow(<VocabularySet {...props} />);
+    expect(component.hasClass('vocabulary_list')).toBeTruthy();
 
-    component.setState({
-      message: props.message,
-      messageClass: props.messageClass
-    });
+    const vocabularySet = component.find('.vocabulary_list');
 
-    const vocabularySet = component.find('.VocabularySet');
-    expect(vocabularySet.find('li').length).toBe(1);
-  });
+    const listItem = vocabularySet.find('li').at(0);
 
-  xit('appends new word to VocabularySet list', () => {
-    const component = shallow(<VocabularySet {...props} />);
+    const button = listItem.find('button');
 
-    const checkAndCreateNewWordInVocabularySetMock = jest.fn();
-    component.instance().checkAndCreateNewWordInVocabularySet = checkAndCreateNewWordInVocabularySetMock;
+    button.props().onClick();
 
-    const passageComponent = component.find('.VocabularySet');
-
-    const button = passageComponent.find(Button);
-    expect(button.length).toBe(1);
-
-    component.setState({
-      word: 'new word',
-      vocabularySet: []
-    });
-
-    expect(button.props().className).toBe('Button_primary');
-    expect(button.prop('children')).toEqual('create');
-    button
-      .at(0)
-      .props()
-      .onClick();
-    expect(checkAndCreateNewWordInVocabularySetMock).toHaveBeenCalled();
+    expect(deleteVocabularyMock).toHaveBeenCalled();
   });
 });

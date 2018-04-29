@@ -1,14 +1,22 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import { updatePassage, clearPassage } from './passageActions';
+import {
+  updatePassage,
+  clearPassage,
+  updateVocabularySet
+} from './passageActions';
 import passageActionTypes from './passageActionTypes';
+import vocabularyActionTypes from '../Vocabulary/vocabularyActionTypes';
 
 describe('passageActions', () => {
   const middlewares = [thunk];
   const state = {
     passage: {
       passage: ''
+    },
+    vocabulary: {
+      vocabularyList: []
     }
   };
 
@@ -40,6 +48,22 @@ describe('passageActions', () => {
       ];
 
       store.dispatch(clearPassage());
+
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  describe('updateVocabularySet', () => {
+    it(`dispatchs updateVocabularyList action`, () => {
+      const expectedActions = [
+        {
+          type: vocabularyActionTypes.UPDATE_VOCABULARY_LIST,
+          list: ['']
+        }
+      ];
+      const store = mockStore(state);
+
+      store.dispatch(updateVocabularySet());
 
       expect(store.getActions()).toEqual(expectedActions);
     });
