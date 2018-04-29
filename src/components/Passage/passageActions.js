@@ -29,11 +29,12 @@ const updateVocabularySet = () => {
 
     if (passage !== '') {
       let newList = [];
-      sortedWordMap.map(word => {
-        if (word !== '') {
+      sortedWordMap.forEach(word => {
+        if (word.name.trim() !== '') {
           newList.push(word.name);
         }
       });
+      newList = newList.slice(0, 10);
       return dispatch(updateVocabularyList(newList));
     }
     return dispatch(updateVocabularyList([]));
