@@ -9,6 +9,7 @@ import PassageComponent from './PassageComponent';
 import PassageContainer from './PassageContainer';
 import passageActionTypes from './passageActionTypes';
 import * as passageActions from './passageActions';
+import vocabularyActionTypes from '../Vocabulary/vocabularyActionTypes';
 
 describe('<PassageContainer />', () => {
   const state = {
@@ -75,7 +76,8 @@ describe('<PassageContainer />', () => {
     it('calls clearPassage action', () => {
       componentProps.clearPassage();
       expect(store.dispatch).toHaveBeenCalledWith({
-        type: passageActionTypes.CLEAR_PASSAGE
+        type: passageActionTypes.CLEAR_PASSAGE,
+        type: vocabularyActionTypes.RESET_VOCABULARY_LIST
       });
     });
   });

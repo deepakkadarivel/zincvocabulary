@@ -58,7 +58,7 @@ describe('passageActions', () => {
       const expectedActions = [
         {
           type: vocabularyActionTypes.UPDATE_VOCABULARY_LIST,
-          list: ['']
+          list: []
         }
       ];
       const store = mockStore(state);

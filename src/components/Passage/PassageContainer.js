@@ -5,6 +5,7 @@ import {
   updatePassage,
   updateVocabularySet
 } from './passageActions';
+import { resetVocabularyList } from '../Vocabulary/vocabularyActions';
 
 const mapStateToProps = state => {
   return {};
@@ -17,8 +18,9 @@ const mapDispatchToProps = dispatch => {
       dispatch(updateVocabularySet());
     },
 
-    clearPassage: passage => {
+    clearPassage() {
       dispatch(clearPassage());
+      dispatch(resetVocabularyList());
     }
   };
 };

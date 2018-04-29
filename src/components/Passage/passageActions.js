@@ -22,19 +22,21 @@ const clearPassage = () => {
 const updateVocabularySet = () => {
   return (dispatch, getState) => {
     const passage = getState().passage.passage;
-    const list = getState().vocabulary.vocabularyList;
 
     const wordsArray = splitByWords(passage);
     const uniqueWordMap = createWordMap(wordsArray);
     const sortedWordMap = sortByCount(uniqueWordMap);
 
-    let newList = [];
-    sortedWordMap.map(word => {
-      if (word !== '') {
-        newList.push(word.name);
-      }
-    });
-    return dispatch(updateVocabularyList(newList));
+    if (passage !== '') {
+      let newList = [];
+      sortedWordMap.map(word => {
+        if (word !== '') {
+          newList.push(word.name);
+        }
+      });
+      return dispatch(updateVocabularyList(newList));
+    }
+    return dispatch(updateVocabularyList([]));
   };
 };
 
