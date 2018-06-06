@@ -1,6 +1,6 @@
-##Problem Statement
+React dev example with Redux and Jest
 
-Implement a 2-step wizard to create a set of frequently occurring words from the provided passage.
+Sample 2-step wizard to create a set of frequently occurring words from the provided passage.
 
 In Step 1, the user should be able to paste a large piece of text in the text box. When the user clicks "Next", find the 10 most frequently occurring words from the passage and show them in Step 2. 
 
